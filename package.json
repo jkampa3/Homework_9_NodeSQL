@@ -1,0 +1,24 @@
+{
+  "name": "Homework_9_NodeSQL",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkampa3/Homework_9_NodeSQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkampa3/Homework_9_NodeSQL/issues"
+  },
+  "homepage": "https://github.com/jkampa3/Homework_9_NodeSQL#readme",
+  "dependencies": {
+    "inquirer": "^6.0.0",
+    "mysql": "^2.15.0"
+  }
+}
