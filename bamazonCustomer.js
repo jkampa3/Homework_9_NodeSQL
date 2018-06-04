@@ -70,7 +70,7 @@ function bamazonCustomerPrompt() {
 
         connection.query(inquirerQuery,
             {
-                item_id = item
+                item_id = itemID
             },
             function (err, data) {
                 if (err) throw err;
