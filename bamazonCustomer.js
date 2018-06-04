@@ -25,9 +25,9 @@ function displayInventory() {
         var initialInvenotry = "";
         for (var i = 0; i < data.length; i++) {
             initialInvenotry = "";
-            initialInvenotry += "Item ID: " + data[i].item_id + "  ";
-            initialInvenotry += "Product Name: " + data[i].product_name + "  ";
-            initialInvenotry += "Department: " + data[i].department_name + "  ";
+            initialInvenotry += "Item ID: " + data[i].item_id + " | ";
+            initialInvenotry += "Product Name: " + data[i].product_name + " | ";
+            initialInvenotry += "Department: " + data[i].department_name + " | ";
             initialInvenotry += "Price: $" + data[i].price + "\n"
 
             console.log(initialInvenotry);
