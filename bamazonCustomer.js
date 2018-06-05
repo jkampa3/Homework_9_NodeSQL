@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "croEtLu4rO",
     database: "bamazon"
 });
 
@@ -70,22 +70,39 @@ function bamazonCustomerPrompt() {
 
         connection.query(inquirerQuery,
             {
-                item_id = itemID
+                item_id: itemID
             },
             function (err, data) {
                 if (err) throw err;
 
                 if (data.length === 0) {
-                    console.log('USER ERROR: Selected ITEM ID is invalid. Please select a valid ITEM ID from list below.');
+                    console.log('USER ERROR: Selected ITEM ID is Invalid. Please Select a Valid ITEM ID from List Below.');
                     displayInventory();
-                };
+                } else {
+                    var inventoryDataCheck = data[0];
+                    if (quantity <= inventoryDataCheck.stock_quantity) {
+                        console.log('Order Confirmed! Order Being Placed!');
+                        var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (inventoryDataCheck.stock_quantity - quantityRequested) + ' WHERE item_id = ' + item;
+                        connection.query(updateQueryStr, function (err, data) {
+                            if (err) throw err;
+                            console.log('The Total Today is $' + inventoryDataCheck.price * quantityRequested);
+                            console.log('Thank you for shopping with us!');
+                            console.log("\n---------------------------------------------------------------------\n");
+                            connection.end();
+                        })
+                    } else {
+                        console.log('Sorry, Stock Is Low. Please Replace Order');
+                        console.log('Please Modify Your Order.');
+                        console.log("\n---------------------------------------------------------------------\n");
 
-
-            });
-
+                        displayInventory();
+                    }
+                }
+            })
     });
+};
 
-}
+
 
 function runBamazonCustomer() {
 
