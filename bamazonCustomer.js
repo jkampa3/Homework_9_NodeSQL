@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "croEtLu4rO",
     database: "bamazon"
 });
 
@@ -62,7 +62,7 @@ function bamazonCustomerPrompt() {
             message: 'How many of the above selection do you need?'
         }
 
-    ]).then(function (userInput) {
+    ]).then(function (input) {
 
         var itemID = input.item_id;
         var quantityRequested = input.quantity;
@@ -80,20 +80,20 @@ function bamazonCustomerPrompt() {
                     displayInventory();
                 } else {
                     var inventoryDataCheck = data[0];
-                    if (quantity <= inventoryDataCheck.stock_quantity) {
+                    if (quantityRequested <= inventoryDataCheck.stock_quantity) {
                         console.log('Order Confirmed! Order Being Placed!');
-                        var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (inventoryDataCheck.stock_quantity - quantityRequested) + ' WHERE item_id = ' + item;
+                        var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (inventoryDataCheck.stock_quantity - quantityRequested) + ' WHERE item_id = ' + itemID;
                         connection.query(updateQueryStr, function (err, data) {
                             if (err) throw err;
                             console.log('The Total Today is $' + inventoryDataCheck.price * quantityRequested);
                             console.log('Thank you for shopping with us!');
-                            console.log("\n---------------------------------------------------------------------\n");
+                            console.log("---------------------------------------------------------------------------------------------------------------\n");
                             connection.end();
                         })
                     } else {
                         console.log('Sorry, Stock Is Low. Please Replace Order');
                         console.log('Please Modify Your Order.');
-                        console.log("\n---------------------------------------------------------------------\n");
+                        console.log("---------------------------------------------------------------------------------------------------------------\n");
 
                         displayInventory();
                     }
@@ -101,8 +101,6 @@ function bamazonCustomerPrompt() {
             })
     });
 };
-
-
 
 function runBamazonCustomer() {
 
